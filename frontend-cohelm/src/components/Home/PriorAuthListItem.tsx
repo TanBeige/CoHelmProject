@@ -2,6 +2,7 @@ import { PriorAuth } from "@/interfaces/PriorAuth";
 import React from "react";
 import Badge from "../design/Badge";
 import Link from "next/link";
+import IsMetBadge from "../design/IsMetBadge";
 
 const PriorAuthListItem = ({ item, id }: { item: PriorAuth; id: number }) => {
   return (
@@ -10,10 +11,7 @@ const PriorAuthListItem = ({ item, id }: { item: PriorAuth; id: number }) => {
         <div className="flex flex-row items-center space-x-2 mb-2">
           <p className="mb-1 text-lg">{item.procedure_name}</p>
           <Badge label={item.case_id} />
-          <Badge
-            label={item.is_met ? "Accepted" : "Denied"}
-            color={item.is_met ? "green" : "red"}
-          />
+          <IsMetBadge is_met={item.is_met}/>
         </div>
 
         <div className="line-clamp-2 text-sm text-gray-500">{item.summary}</div>
