@@ -17,15 +17,13 @@ const Home = (props: Props) => {
 
   const [allPriors, setAllPriors] = useState<PriorAuth[] | null>(null);
 
-  console.log("priorAuthspriorAuths", priorAuths);
-
   useEffect(() => {
     // Normally you would use the API to set loading, but with localstorage this is the best way to handle it without hydration issues
     if (priorAuths !== null) {
       setAllPriors(priorAuths);
     }
   }, [priorAuths]);
-  console.log("allPriorsallPriorsallPriors", allPriors);
+
   const renderContent = () => {
     if (allPriors === null) {
       return (

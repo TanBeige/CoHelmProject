@@ -45,11 +45,9 @@ const SinglePrior = () => {
     if (submitting) {
       socket.emit("start_process", "begin");
       socket.on("process_update", (update) => {
-        console.log(update);
         setSubmitLabel(update.message);
       });
       socket.on("process_completed", (update: PriorAuthPromise) => {
-        console.log(update);
         const updatedPriorAuth = update?.data;
 
         // Append to end, using last item as index for this project
