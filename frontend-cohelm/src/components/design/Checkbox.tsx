@@ -2,11 +2,11 @@ import React from "react";
 import { BiCheck } from "react-icons/bi";
 import Fade from "../animations/Fade";
 
-const Checkbox = ({ checked }: { checked: boolean }) => {
+const Checkbox = ({ checked,  color = "green" }: { checked: boolean, color: string }) => {
   return (
     <div
-      className={`transition-colors w-5 h-5 flex justify-center items-center border-2 group border-green-500 ${
-        checked ? "bg-green-500" : "bg-white"
+      className={`transition-colors w-5 h-5 flex justify-center items-center border-2 group border-${color}-500 ${
+        checked ? `bg-${color}-500` : "bg-white"
       } rounded cursor-pointer`}
     >
       {checked && (

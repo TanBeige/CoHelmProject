@@ -37,10 +37,9 @@ const PriorAuth = ({ id }: { id: number }) => {
     const element = document.getElementById(`section-${section}`);
     if (element) {
       // 👇 Will scroll smoothly to the top of the next section
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
-
-  }
+  };
 
   useEffect(() => {
     // Normally you would use the API to set loading, but with localstorage this is the best way to handle it without hydration issues
@@ -61,7 +60,7 @@ const PriorAuth = ({ id }: { id: number }) => {
   const item = currentPriorAuths[Number(id)];
 
   return (
-    <div>
+    <div className="mb-12">
       <div>
         {/* HEADER */}
         <div className="flex flex-row items-center mb-4 space-x-3">
@@ -75,6 +74,14 @@ const PriorAuth = ({ id }: { id: number }) => {
             </div>
           </Tooltip>
           <IsMetBadge is_met={item.is_met} />
+        </div>
+        {/* CPT CODES */}
+        <div className="mb-4">
+          <p className="text-sm text-gray-500 mb-1">CPT Codes</p>
+          <div className="flex flex-row items-center space-x-2">
+
+          {item.cpt_codes.map(cpt => <Badge label={cpt} key={cpt}/>)}
+          </div>
         </div>
         {/* STATUS AND PATH */}
         <div className="mb-4 flex flex-row space-x-4">
@@ -109,10 +116,12 @@ const PriorAuth = ({ id }: { id: number }) => {
         <div className="w-4 border-r-2 mr-6"></div>
         <div className="flex flex-col space-y-4 w-full">
           {item.steps.map((st) => {
-    const selectedOptions: Option[] = st.options.filter((o) => o.selected);
+            const selectedOptions: Option[] = st.options.filter(
+              (o) => o.selected
+            );
 
             return (
-              <div className="relative"  id={`section-${st.key}`}>
+              <div className="relative" id={`section-${st.key}`}>
                 <div className="absolute -left-11 -ml-[1px] top-0 ">
                   {st.is_met ? (
                     <BiCheckCircle className="h-10 w-10 bg-white text-green-500 rounded-full" />
@@ -124,8 +133,13 @@ const PriorAuth = ({ id }: { id: number }) => {
                 <div className="rounded-lg border p-4">
                   <p className="text-gray-500 text-sm">Instructions</p>
                   <div>
-                      <QuestionAndOptions question={st.question} selectedOptions={selectedOptions} allOptions={st.options}/>
-                    </div>
+                    <QuestionAndOptions
+                      is_met={st.is_met}
+                      question={st.question}
+                      selectedOptions={selectedOptions}
+                      allOptions={st.options}
+                    />
+                  </div>
                   <div>
                     <p className="text-lg font-semibold">
                       Option{selectedOptions.length > 1 && "s"}{" "}
@@ -153,19 +167,13 @@ const PriorAuth = ({ id }: { id: number }) => {
                     </div>
                   </div>
                   <div>
-                    <Evidence evidence={st.evidence}/>
+                    <Evidence evidence={st.evidence} />
                   </div>
                 </div>
               </div>
             );
           })}
         </div>
-      </div>
-      <div>{/* <p>{JSON.stringify(priorAuths[Number(id)])}</p> */}</div>
-      <div className="bg-red-200 mt-8 mb-16 p-4 rounded-lg">
-        <p>
-        {item.is_met ? "Likely Acceptance" : "Likely Denial"}
-        </p>
       </div>
     </div>
   );
