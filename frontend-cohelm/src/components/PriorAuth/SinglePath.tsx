@@ -6,17 +6,19 @@ interface SinglePathProps {
     pathKey: string;
     is_met: boolean;
     is_final: boolean;
+    handleClick: (params: string) => void;
 }
 
-const SinglePath = ({pathKey, is_met, is_final}: SinglePathProps) => {
+const SinglePath = ({pathKey, is_met, is_final, handleClick}: SinglePathProps) => {
   return (
     <div
       className="flex flex-row items-center space-x-1"
     >
       <div
+        onClick={()=>handleClick(pathKey)}
         className={`relative transition-colors group cursor-pointer hover:bg-green-500 ${
           is_met ? "hover:bg-green-500" : "hover:bg-red-500"
-        } rounded-lg px-2 py-1`}
+        } rounded-lg px-2 pt-1 pb-2`}
       >
         <p className="text-gray-500 text-sm group-hover:text-white">
           {parseInt(pathKey) + 1}

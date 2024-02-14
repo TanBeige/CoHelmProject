@@ -38,7 +38,7 @@ const NavLink = ({ link, title, isSelected, disabled }: NavLinkProps) => {
               isSelected
                 ? "bg-gray-200 text-gray-700"
                 : "text-gray-500 hover:bg-gray-100"
-            } px-4 pt-2 pb-4 rounded-t-lg`}
+            } px-4 pt-2 pb-3 rounded-t-lg`}
           >
             <p className="">{title}</p>
           </div>
@@ -68,8 +68,9 @@ const NavBar = () => {
         </div>
       </div> */}
 
-      <div className="flex flex-row space-x-1 max-w-7xl mx-auto">
-        <div className="relative w-14 h-8 mr-6 mt-1">
+      <div className="flex flex-row space-x-1 max-w-7xl mx-auto text-nowrap">
+      <Link href={"/"} key={"home"}>
+        <div className="relative w-14 h-8 mr-6 mt-1 cursor-pointer hover:opacity-60 transition-opacity">
           {/* Use next image as it is rendered from server, for dynamic images, use <img> tag */}
           <Image
             alt="logo"
@@ -78,6 +79,8 @@ const NavBar = () => {
             className="object-contain drop-shadow-lg"
           />
         </div>
+        </Link>
+
         {navPaths.map((item: NavLinkProps) => (
           <NavLink
             key={item.link}
