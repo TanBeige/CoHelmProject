@@ -1,8 +1,9 @@
 import { Evidence } from "@/interfaces/PriorAuth";
 import React, { useState } from "react";
 import { GoLightBulb } from "react-icons/go";
-import Badge from "../design/Badge";
-import Fade from "../animations/Fade";
+import Badge from "../../design/Badge";
+import Fade from "../../animations/Fade";
+import CollapseButton from "../../design/CollapseButton";
 
 interface EvidenceProps {
   evidence: Evidence[];
@@ -23,12 +24,7 @@ const Evidence = ({ evidence }: EvidenceProps) => {
             This decision was made based on citations from the medical record.
           </p>
           <div>
-            <p
-              onClick={() => setOPenEvidence(!openEvidence)}
-              className="inline-block transition-colors text-sm text-gray-500 py-1 px-1 cursor-pointer hover:bg-gray-100 select-none"
-            >
-              {openEvidence ? "Hide" : "Show"} evidence
-            </p>
+            <CollapseButton onClick={() => setOPenEvidence(!openEvidence)}>{openEvidence ? "Hide" : "Show"} evidence</CollapseButton>
           </div>
         </div>
       </div>

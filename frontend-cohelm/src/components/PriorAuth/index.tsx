@@ -9,12 +9,8 @@ import { Option, PriorAuth } from "@/interfaces/PriorAuth";
 import LoadingCircle from "../design/LoadingCircle";
 import IsMetBadge from "../design/IsMetBadge";
 import SinglePath from "./SinglePath";
-import { MdCheckBox } from "react-icons/md";
-import { BiCheckCircle, BiXCircle } from "react-icons/bi";
-import { GiLightBulb } from "react-icons/gi";
-import { GoLightBulb } from "react-icons/go";
-import Evidence from "./Evidence";
-import QuestionAndOptions from "./QuestionAndOptions";
+import StepItem from "./StepItem";
+import { steps } from "framer-motion";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -50,7 +46,7 @@ const PriorAuth = ({ id }: { id: number }) => {
 
   if (currentPriorAuths === null) {
     return (
-      <div className="w-40 h-40 mx-auto mt-32">
+      <div className="w-20 h-20 mx-auto mt-32">
         <LoadingCircle />
       </div>
     );
@@ -79,8 +75,9 @@ const PriorAuth = ({ id }: { id: number }) => {
         <div className="mb-4">
           <p className="text-sm text-gray-500 mb-1">CPT Codes</p>
           <div className="flex flex-row items-center space-x-2">
-
-          {item.cpt_codes.map(cpt => <Badge label={cpt} key={cpt}/>)}
+            {item.cpt_codes.map((cpt) => (
+              <Badge label={cpt} key={cpt} />
+            ))}
           </div>
         </div>
         {/* STATUS AND PATH */}
@@ -119,58 +116,12 @@ const PriorAuth = ({ id }: { id: number }) => {
             const selectedOptions: Option[] = st.options.filter(
               (o) => o.selected
             );
-
             return (
-              <div className="relative" id={`section-${st.key}`}>
-                <div className="absolute -left-11 -ml-[1px] top-0 ">
-                  {st.is_met ? (
-                    <BiCheckCircle className="h-10 w-10 bg-white text-green-500 rounded-full" />
-                  ) : (
-                    <BiXCircle className="h-10 w-10 bg-white text-red-500 rounded-full" />
-                  )}
-                </div>
-
-                <div className="rounded-lg border p-4">
-                  <p className="text-gray-500 text-sm">Instructions</p>
-                  <div>
-                    <QuestionAndOptions
-                      is_met={st.is_met}
-                      question={st.question}
-                      selectedOptions={selectedOptions}
-                      allOptions={st.options}
-                    />
-                  </div>
-                  <div>
-                    <p className="text-lg font-semibold">
-                      Option{selectedOptions.length > 1 && "s"}{" "}
-                      {selectedOptions.map((o, index) => (
-                        <span>
-                          {o.key}
-                          {index < selectedOptions.length - 2
-                            ? ", "
-                            : `${
-                                index < selectedOptions.length - 1
-                                  ? ", and "
-                                  : ""
-                              }`}
-                        </span>
-                      ))}{" "}
-                      {selectedOptions.length > 1 ? "have" : "has"} been
-                      selected because...
-                    </p>
-                    <div className="my-2">
-                      <pre
-                        className={`text-wrap leading-6 ${outfit.className}`}
-                      >
-                        {st.reasoning}
-                      </pre>
-                    </div>
-                  </div>
-                  <div>
-                    <Evidence evidence={st.evidence} />
-                  </div>
-                </div>
-              </div>
+              <StepItem
+                key={st.key}
+                selectedOptions={selectedOptions}
+                step={st}
+              />
             );
           })}
         </div>

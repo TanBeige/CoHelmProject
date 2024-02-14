@@ -1,8 +1,9 @@
 import { Option } from "@/interfaces/PriorAuth";
 import React, { useState } from "react";
 import { MdCheckBox } from "react-icons/md";
-import Checkbox from "../design/Checkbox";
-import Fade from "../animations/Fade";
+import Checkbox from "../../design/Checkbox";
+import Fade from "../../animations/Fade";
+import CollapseButton from "../../design/CollapseButton";
 
 interface QuestionAndOptionsProps {
   question: string;
@@ -42,12 +43,12 @@ const QuestionAndOptions = ({
         })}
       </div>
       <div className="mb-4">
-        <p
-          onClick={() => setOpenOptions(!openOptions)}
-          className="inline-block transition-colors text-sm text-gray-500 my-1 py-1 px-1 rounded cursor-pointer hover:bg-gray-100"
-        >
+        <div className="my-1">
+
+        <CollapseButton onClick={() => setOpenOptions(!openOptions)}>
           {openOptions ? "Hide" : "Show all"} options
-        </p>
+        </CollapseButton>
+        </div>
         {openOptions && (
           <Fade fadeKey={question} fadeDuration={0.2}>
             <div className="ml-1">

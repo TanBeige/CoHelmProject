@@ -9,6 +9,7 @@ import { AppContext } from "@/context/AppContext";
 import NoPriorAuthsFound from "./NoPriorAuthsFound";
 import { PriorAuth } from "@/interfaces/PriorAuth";
 import PriorAuthListItem from "./PriorAuthListItem";
+import LoadingCircle from "../design/LoadingCircle";
 
 type Props = {};
 
@@ -27,8 +28,8 @@ const Home = (props: Props) => {
   const renderContent = () => {
     if (allPriors === null) {
       return (
-        <div>
-          <p>loading</p>
+        <div className="w-20 h-20 mx-auto mt-32">
+          <LoadingCircle />
         </div>
       );
     }
